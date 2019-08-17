@@ -49,44 +49,41 @@ defmodule Publishex.Adapter.NetlifyTest do
                  end
   end
 
-  describe "upload" do
-    test "returns d" do
-      capture_io(fn ->
-        Publishex.publish("doc",
-          adapter: Publishex.Adapter.Netlify,
-          file_lister: FakeLister,
-          file_reader: FakeReader,
-          upload_strategy: Publishex.UploadStrategy.Sync,
-          adapter_opts: [
-            token: "bogus_token",
-            site_id: "awesome-austin-122b2d.netlify.com",
-            client: FakeClient
-          ]
-        )
-      end)
+  test "uploads files" do
+    capture_io(fn ->
+      Publishex.publish("doc",
+        adapter: Publishex.Adapter.Netlify,
+        file_lister: FakeLister,
+        file_reader: FakeReader,
+        upload_strategy: Publishex.UploadStrategy.Sync,
+        adapter_opts: [
+          token: "bogus_token",
+          site_id: "awesome-austin-122b2d.netlify.com",
+          client: FakeClient
+        ]
+      )
+    end)
 
-      assert_received {url, body, headers}
+    assert_received {url, body, headers}
 
-      assert "https://api.netlify.com/api/v1/sites/awesome-austin-122b2d.netlify.com/deploys" =
-               url
+    assert "https://api.netlify.com/api/v1/sites/awesome-austin-122b2d.netlify.com/deploys" = url
 
-      assert %{
-               "files" => %{
-                 "/123.html" => "94e66df8cd09d410c62d9e0dc59d3a884e458e05"
-               },
-               "functions" => %{}
-             } = Jason.decode!(body)
+    assert %{
+             "files" => %{
+               "/123.html" => "94e66df8cd09d410c62d9e0dc59d3a884e458e05"
+             },
+             "functions" => %{}
+           } = Jason.decode!(body)
 
-      assert [
-               {"Content-Type", "application/json"},
-               {"Authorization", "Bearer bogus_token"}
-             ] = headers
+    assert [
+             {"Content-Type", "application/json"},
+             {"Authorization", "Bearer bogus_token"}
+           ] = headers
 
-      assert_received {:read_file, "doc/123.html"}
+    assert_received {:read_file, "doc/123.html"}
 
-      assert_received {:upload_file,
-                       "https://api.netlify.com/api/v1/deploys/5d57d97123456782dcdbf7c5/files/123.html",
-                       "some content"}
-    end
+    assert_received {:upload_file,
+                     "https://api.netlify.com/api/v1/deploys/5d57d97123456782dcdbf7c5/files/123.html",
+                     "some content"}
   end
 end
