@@ -1,18 +1,18 @@
 defmodule Publishex.MixProject do
   use Mix.Project
 
-  @url "https://github.com/maartenvanvliet/certbot"
+  @url "https://github.com/maartenvanvliet/publishex"
   def project do
     [
       app: :publishex,
-      version: "1.0.0",
+      version: "1.0.1",
       elixir: "~> 1.9",
       start_permanent: Mix.env() == :prod,
       deps: deps(),
       source_url: @url,
       homepage_url: @url,
       name: "Publishex",
-      description: "Publish static files to static file hoster (Netlify)",
+      description: "Publish static files to static file hoster (e.g. Netlify)",
       package: [
         maintainers: ["Maarten van Vliet"],
         licenses: ["MIT"],
@@ -42,9 +42,6 @@ defmodule Publishex.MixProject do
       {:ex_doc, "~> 0.21", only: :dev},
       {:mox, "~> 0.5", only: :test},
       {:credo, ">= 0.0.0", only: :dev, runtime: false}
-
-      # {:dep_from_hexpm, "~> 0.3.0"},
-      # {:dep_from_git, git: "https://github.com/elixir-lang/my_dep.git", tag: "0.1.0"}
     ]
   end
 end
