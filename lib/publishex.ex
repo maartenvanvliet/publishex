@@ -10,7 +10,6 @@ defmodule Publishex do
     """
     defstruct [:file_lister, :adapter_opts, :directory, :upload_strategy, :file_reader]
 
-    @spec build(keyword) :: Publishex.Config.t()
     def build(opts) do
       %__MODULE__{
         directory: Keyword.fetch!(opts, :directory),
