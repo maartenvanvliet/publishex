@@ -5,7 +5,7 @@
 Publish a directory of static files to a static file hoster such as Netlify. 
 
 E.g. if you generate your `ex_doc` documentation for a private repository you can
-publish this to a Netlify site.
+publish this to a Netlify site. See for example [https://naughty-austin-122b2d.netlify.com/]
 
 ## Installation
 
@@ -15,7 +15,7 @@ by adding `publishex` to your list of dependencies in `mix.exs`:
 ```elixir
 def deps do
   [
-    {:publishex, "~> 1.0.0"}
+    {:publishex, "~> 1.0.1"}
   ]
 end
 ```
