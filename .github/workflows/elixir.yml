@@ -17,10 +17,14 @@ jobs:
         mix local.rebar --force
         mix local.hex --force
         mix deps.get
+    - name: Compile app
+      run: mix compile --warnings-as-errors
     - name: Run format check
       run: mix format --check-formatted
     - name: Run credo check
       run: mix credo --strict
     - name: Run Tests
-      run: mix test
+      run: |
+        mkdir doc
+        mix test --cover
 
