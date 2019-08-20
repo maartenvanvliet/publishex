@@ -1,5 +1,5 @@
 defmodule Publishex.Adapter.S3 do
-  @moduledoc "Adapter for uploading a directory to netlify"
+  @moduledoc "Adapter for uploading a directory to S3"
 
   alias ExAws.S3
   alias Publishex.Util
