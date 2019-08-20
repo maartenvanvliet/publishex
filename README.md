@@ -46,7 +46,7 @@ The personal access token can be created in the Netlify dashboard [https://app.n
 # Generate the docs
 mix docs
 
-# Publish to netlify (defaults to `doc` directory)
+# Publish to S3 (defaults to `doc` directory)
 mix publishex.s3 --bucket bucket_name --region us-west-1 --access_key_id access_key_id --secret_access_key secret_access_key --acl public_read
 ```
 Setting the ACL is explicit to prevent accidental public files.
