@@ -24,10 +24,18 @@ defmodule Publishex do
   @doc """
   Publish directory to static host.
 
+  ## Netlify
       Publishex.publish("doc",
         adapter: Publishex.Adapter.Netlify,
         adapter_opts: [token: token, site_id: site_id]
       )
+
+  ## S3
+      Publishex.publish("doc",
+        adapter: Publishex.Adapter.S3,
+        adapter_opts: [bucket: "your.s3.bucket", region: "us-west-1", access_key_id: "access_key_id", secret_access_key: "secret_access_key"],
+      ])
+
   """
   def publish(directory, opts) do
     config = Config.build(opts ++ [directory: directory])
