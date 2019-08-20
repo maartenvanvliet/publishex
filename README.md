@@ -41,7 +41,7 @@ mix publishex.netlify --directory "some_dir" --token personal_access_token --sit
 
 The personal access token can be created in the Netlify dashboard [https://app.netlify.com/user/applications#personal-access-tokens]
 
-### Netlify
+### S3
 ```
 # Generate the docs
 mix docs
@@ -49,6 +49,7 @@ mix docs
 # Publish to netlify (defaults to `doc` directory)
 mix publishex.s3 --bucket bucket_name --region us-west-1 --access_key_id access_key_id --secret_access_key secret_access_key --acl public_read
 ```
+Setting the ACL is explicit to prevent accidental public files.
 
 See [https://docs.aws.amazon.com/AmazonS3/latest/dev/WebsiteHosting.html] on how to create a static site on S3
 
