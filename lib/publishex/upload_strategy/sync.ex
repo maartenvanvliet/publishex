@@ -6,7 +6,7 @@ defmodule Publishex.UploadStrategy.Sync do
   def run(files, upload_file, _opts \\ []) do
     Enum.each(
       files,
-      fn {file, _hash} ->
+      fn file ->
         upload_file.(file)
       end
     )

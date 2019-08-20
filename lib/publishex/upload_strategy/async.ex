@@ -6,7 +6,7 @@ defmodule Publishex.UploadStrategy.Async do
   def run(files, upload_file, opts \\ [max_concurrency: 10]) do
     Task.async_stream(
       files,
-      fn {file, _hash} ->
+      fn file ->
         upload_file.(file)
       end,
       opts

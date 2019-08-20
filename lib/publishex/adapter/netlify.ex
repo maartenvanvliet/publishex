@@ -1,6 +1,8 @@
 defmodule Publishex.Adapter.Netlify do
   @moduledoc "Adapter for uploading a directory to netlify"
 
+  alias Publishex.Util
+
   defmodule Deployment do
     @moduledoc false
     defstruct [:required, :id, :url]
@@ -25,8 +27,8 @@ defmodule Publishex.Adapter.Netlify do
 
   """
   def publish(config) do
-    token = config_key(config.adapter_opts, :token)
-    site_id = config_key(config.adapter_opts, :site_id)
+    token = Util.config_key(config.adapter_opts, :token)
+    site_id = Util.config_key(config.adapter_opts, :site_id)
     client = Keyword.get(config.adapter_opts, :client, HTTPoison)
 
     directory = config.directory
@@ -44,7 +46,7 @@ defmodule Publishex.Adapter.Netlify do
       {:ok, %{id: deploy_id, required: required_files, url: url}} ->
         files
         |> filter_required(required_files)
-        |> config.upload_strategy.run(fn file ->
+        |> config.upload_strategy.run(fn {file, _hash} ->
           IO.puts("Uploading #{file}...")
           path = directory <> file
           contents = config.file_reader.run(path)
@@ -103,16 +105,10 @@ defmodule Publishex.Adapter.Netlify do
     end)
   end
 
-  defp remove_prefix(path, prefix) do
-    base = byte_size(prefix)
-    <<_::binary-size(base), rest::binary>> = path
-    rest
-  end
-
   defp build_digests(paths, directory, file_reader) do
     paths
     |> Enum.map(fn path ->
-      digest = remove_prefix(path, directory)
+      digest = Util.remove_prefix(path, directory)
       {digest, hash_file(path, file_reader)}
     end)
     |> Map.new()
@@ -136,16 +132,5 @@ defmodule Publishex.Adapter.Netlify do
 
   defp parse_body(body) do
     Jason.decode!(body)
-  end
-
-  defp config_key(opts, key) do
-    case Keyword.fetch(opts, key) do
-      {:ok, value} ->
-        value
-
-      :error ->
-        raise ArgumentError,
-              "Could not find required #{inspect(key)} in adapter_opts: #{inspect(opts)}"
-    end
   end
 end
