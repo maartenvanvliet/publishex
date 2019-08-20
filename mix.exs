@@ -5,14 +5,14 @@ defmodule Publishex.MixProject do
   def project do
     [
       app: :publishex,
-      version: "1.0.1",
+      version: "1.1.0",
       elixir: "~> 1.9",
       start_permanent: Mix.env() == :prod,
       deps: deps(),
       source_url: @url,
       homepage_url: @url,
       name: "Publishex",
-      description: "Publish static files to static file hoster (e.g. Netlify)",
+      description: "Publish static files to static file hoster (Netlify or S3)",
       package: [
         maintainers: ["Maarten van Vliet"],
         licenses: ["MIT"],
