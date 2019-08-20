@@ -3,7 +3,7 @@ defmodule Mix.Tasks.Publishex.S3 do
 
   @shortdoc "Publish a directory to S3"
   @moduledoc """
-  Publish directory to Netlify
+  Publish directory to S3
 
   ## Usage
 
