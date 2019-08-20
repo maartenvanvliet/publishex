@@ -5,7 +5,7 @@ defmodule Publishex.MixProject do
   def project do
     [
       app: :publishex,
-      version: "1.1.0",
+      version: "1.1.1",
       elixir: "~> 1.9",
       start_permanent: Mix.env() == :prod,
       deps: deps(),
