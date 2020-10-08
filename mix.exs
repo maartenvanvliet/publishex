@@ -40,7 +40,7 @@ defmodule Publishex.MixProject do
       {:httpoison, "~> 1.5"},
       {:jason, "~> 1.1"},
       {:ex_doc, "~> 0.21", only: :dev},
-      {:mox, "~> 0.5", only: :test},
+      {:mox, "~> 1.0", only: :test},
       {:credo, ">= 0.0.0", only: :dev, runtime: false},
       {:ex_aws, "~> 2.1", optional: true},
       {:ex_aws_s3, "~> 2.0", optional: true},
