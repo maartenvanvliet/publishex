@@ -37,7 +37,7 @@ defmodule Publishex.MixProject do
   # Run "mix help deps" to learn about dependencies.
   defp deps do
     [
-      {:httpoison, "~> 1.5"},
+      {:httpoison, "~> 2.0"},
       {:jason, "~> 1.1"},
       {:ex_doc, "~> 0.21", only: :dev},
       {:mox, "~> 1.0", only: :test},
